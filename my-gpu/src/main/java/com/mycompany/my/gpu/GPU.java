@@ -18,30 +18,30 @@ public class GPU {
     private String nomeGpu;
     private Double media = 0.0;
     
-    private List<Double> temperaturaGpu, load = new ArrayList<>();
+    private List<Double> temperaturaGpu = new ArrayList<>();
+    private List<Double> loadGpu = new ArrayList<>();
 
     public Double getMediaTemperatura() {
         Double soma = 0.0;
         for (final Gpu g : gpus) {
-                    
+
             List<Temperature> temps = g.sensors.temperatures;
             for (final Temperature t : temps) {
                 temperaturaGpu.add(t.value);
-                
+
             }
             for (Integer i = 0; i < temperaturaGpu.size(); i++) {
                 soma += temperaturaGpu.get(i);
             }
         }
         System.out.println(soma);
-        System.out.println(">"+this.media);
-        return media = soma/temperaturaGpu.size();
+        System.out.println(">" + this.media);
+        return media = soma / temperaturaGpu.size();
     }
 
     public Double getFanRPM() {
         for (final Gpu g : gpus) {
             List<Fan> fans = g.sensors.fans;
-            System.out.println(fans);
             for (final Fan fan : fans) {
                 System.out.println(fan.name + ": " + fan.value + " RPM");
             }
@@ -60,16 +60,22 @@ public class GPU {
     public Double getVideoEngineGpu() {
         return videoEngineGpu;
     }
-    
-    public List getLoadInfo(){
-        for(final Gpu c : gpus){
+
+    public List getLoadInfo() {
+        Integer i = 0;
+        for (final Gpu c : gpus) {
             List<Load> loads = c.sensors.loads;
-            System.out.println(loads);
-            for(final Load l : loads){
-                System.out.println(l.name + ": " + l.value);
+//      
+            for (final Load x : loads) {
+                System.out.println(x.name + ": " + x.value + "< Loads");
+                i++;
+                if (x.name.startsWith("Load GPU Core #" + i)) {
+                    loadGpu.add(x.value);
+                }
             }
         }
-        return load;
+        System.out.println(loadGpu + "<<");
+        return loadGpu;
     }
 
     public String getNomeGpu() {

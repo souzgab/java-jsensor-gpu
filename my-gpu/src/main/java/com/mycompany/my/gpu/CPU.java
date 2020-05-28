@@ -26,7 +26,8 @@ public class CPU {
     private String nomeCpu;
     private Double media = 0.0;
     private Double fanRPM;
-    private List<Double> temperaturaCpu,load = new ArrayList<>();
+    private List<Double> temperaturaCpu = new ArrayList<>();
+    private List<Double> load = new ArrayList<>();
 
     public String getNomeCpu() {
         for (final Cpu c : cpus) {
@@ -41,36 +42,40 @@ public class CPU {
         for (final Cpu c : cpus) {
             List<Temperature> temps = c.sensors.temperatures;
             for (final Temperature t : temps) {
+                System.out.println(t.name + ": " + t.value);
                 temperaturaCpu.add(t.value);
             }
             for (Integer i = 0; i < temperaturaCpu.size(); i++) {
-                System.out.println(temperaturaCpu.get(i));
                 soma += temperaturaCpu.get(i);
             }
         }
-        System.out.println(soma); // Soma as temperaturas de todos os nucleos da cpu
-        System.out.println(">" + this.media);
+//        System.out.println(soma); // Soma as temperaturas de todos os nucleos da cpu
         return media = soma / temperaturaCpu.size();
     }
 
     public Double getFanRPM() {
         for (final Cpu c : cpus) {
             List<Fan> fans = c.sensors.fans;
-            System.out.println(fans);
             for (final Fan fan : fans) {
                 System.out.println(fan.name + ": " + fan.value + " RPM");
             }
         }
         return fanRPM;
     }
-    
-    public List x(){
-        for(final Cpu c : cpus){
+
+    public List getLoadInfo() {
+        Integer i = 0;
+        for (final Cpu c : cpus) {
             List<Load> loads = c.sensors.loads;
-            System.out.println(loads);
-            for(final Load l : loads){
-                System.out.println(l.name + ": " + l.value + "...");
+//      
+            for (final Load x : loads) {
+                System.out.println(x.name + ": " + x.value);
+                i++;
+                if (x.name.startsWith("Load CPU Core #" + i)) {
+                    load.add(x.value);
+                }
             }
+
         }
         return load;
     }
