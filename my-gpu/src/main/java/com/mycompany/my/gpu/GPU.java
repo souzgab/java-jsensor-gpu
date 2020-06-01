@@ -34,8 +34,6 @@ public class GPU {
                 soma += temperaturaGpu.get(i);
             }
         }
-        System.out.println(soma);
-        System.out.println(">" + this.media);
         return media = soma / temperaturaGpu.size();
     }
 
@@ -64,10 +62,8 @@ public class GPU {
     public List getLoadInfo() {
         Integer i = 0;
         for (final Gpu c : gpus) {
-            List<Load> loads = c.sensors.loads;
-//      
+            List<Load> loads = c.sensors.loads;   
             for (final Load x : loads) {
-                System.out.println(x.name + ": " + x.value + "< Loads");
                 i++;
                 if (x.name.startsWith("Load GPU Core #" + i)) {
                     loadGpu.add(x.value);

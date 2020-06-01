@@ -49,7 +49,6 @@ public class CPU {
                 soma += temperaturaCpu.get(i);
             }
         }
-//        System.out.println(soma); // Soma as temperaturas de todos os nucleos da cpu
         return media = soma / temperaturaCpu.size();
     }
 
@@ -75,7 +74,6 @@ public class CPU {
                     load.add(x.value);
                 }
             }
-
         }
         return load;
     }
