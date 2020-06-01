@@ -65,7 +65,14 @@ public class GPU {
             List<Load> loads = c.sensors.loads;   
             for (final Load x : loads) {
                 i++;
-                if (x.name.startsWith("Load GPU Core #" + i)) {
+                System.out.println(x.name + ": " + x.value);
+                if (x.name.startsWith("Load GPU Core")) {
+                    loadGpu.add(x.value);
+                }else if(x.name.startsWith("Load GPU Memory Controller")){
+                    loadGpu.add(x.value);
+                }else if(x.name.startsWith("Load GPU Video Engine")){
+                    loadGpu.add(x.value);
+                }else if(x.name.startsWith("Load GPU Memory")){
                     loadGpu.add(x.value);
                 }
             }

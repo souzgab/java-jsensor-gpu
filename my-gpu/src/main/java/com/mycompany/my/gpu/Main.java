@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         GPU gp = new GPU();
         CPU cc = new CPU();
-        
+
 //        System.out.println("--------------------CPU-----------------------");
 //
 //        cc.getNomeCpu();
@@ -25,11 +25,6 @@ public class Main {
 //        System.out.println("Fan Rpm Cpu: " + cc.getFanRPM());
 //        System.out.println("CPU Temperatura Média: " + cc.getMediaTemperatura());
 //
-//        System.out.println("--------------------GPU-----------------------");
-//
-//        gp.getNomeGpu();
-//        System.out.println("Load Info GPU: " + gp.getLoadInfo());
-//        System.out.println("Fan RPM: " + gp.getFanRPM());
         long TEMPO = (2000 * 1);
 
         Timer timer = null;
@@ -39,7 +34,11 @@ public class Main {
 
             TimerTask tarefa = new TimerTask() {
                 public void run() {
+                    System.out.println("--------------------GPU-----------------------");
+                    gp.getNomeGpu();
                     System.out.println("GPU Temperatura Média: " + gp.getMediaTemperatura());
+                    System.out.println("Load Info GPU: " + gp.getLoadInfo());
+                    System.out.println("Fan RPM: " + gp.getFanRPM());
                 }
             };
             timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
