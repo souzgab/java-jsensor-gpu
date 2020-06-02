@@ -13,6 +13,10 @@ import com.profesorfalken.jsensors.model.sensors.Load;
 import com.profesorfalken.jsensors.model.sensors.Temperature;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -26,6 +30,7 @@ public class CPU {
     private String nomeCpu;
     private Double media = 0.0;
     private Double fanRPM;
+    private Double tempc4;
     private List<Double> temperaturaCpu = new ArrayList<>();
     private List<Double> load = new ArrayList<>();
 
@@ -61,6 +66,10 @@ public class CPU {
         }
         return fanRPM;
     }
+    
+    public Double getTemp4(){
+        return tempc4 = load.get(3);
+    }
 
     public List getLoadInfo() {
         Integer i = 0;
@@ -76,5 +85,21 @@ public class CPU {
             }
         }
         return load;
+    }
+    
+    public String getDadosCpu() {
+        getLoadInfo();
+        
+        JSONObject dadosCpuToJson = new JSONObject();
+
+        try {
+            dadosCpuToJson.put("nomeCpu", getNomeCpu());
+            dadosCpuToJson.put("temperaturaMedia", getMediaTemperatura());
+            
+            System.out.println(dadosCpuToJson.toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(GPU.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return dadosCpuToJson.toString();
     }
 }
